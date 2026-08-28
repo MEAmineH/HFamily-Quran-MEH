@@ -1,0 +1,9 @@
+export type ReviewRating='excellent'|'good'|'weak'|'repeat';
+export type DayAction='postponed'|'makeup'|'repeatPrevious'|'rest';
+export interface ReviewIntervals{excellent:number;good:number;weak:number;repeat:number}
+export interface PlanSettings{totalPages:number;memorizedPages:number;lastMemorizedPage:number;currentSurah:string;startDate:string;memorizationDays:number[];newPagesPerDay:number;dailyReviewPages:number;morningMinutes:number;eveningMinutes:number;reviewIntervals:ReviewIntervals;mushafEdition:string;allowExtraReviews:boolean;reminders:{morning:boolean;evening:boolean;overdue:boolean}}
+export interface PageMeta{page:number;surah:string;juz:number;hizb:number;quarter?:string}
+export interface PageReviewState{page:number;firstMemorized?:string;reviewCount:number;lastReviewed?:string;lastRating?:ReviewRating;nextReview:string;errors?:number;notes?:string;nearReviewStage?:number}
+export interface HistoryEntry{date:string;type:'memorization'|'review'|'postpone'|'settings';page?:number;rating?:ReviewRating;action?:DayAction;notes?:string}
+export interface AppState{settings:PlanSettings;pages:Record<number,PageReviewState>;history:HistoryEntry[];postponedDates:string[];started?:boolean;theme:'light'|'dark'}
+export interface DailyPlan{date:string;isMemorizationDay:boolean;newPages:number[];reviews:PageReviewState[];overdueCount:number;suggestion?:string}
