@@ -1,0 +1,5 @@
+export const DEFAULT_START_DATE = '2026-09-01';
+export const defaultSettings = { totalPages: 604, memorizedPages: 160, lastMemorizedPage: 160, currentSurah: 'نهاية الجزء الثامن تقريبًا', startDate: DEFAULT_START_DATE, memorizationDays: [0, 1, 2, 3, 4], newPagesPerDay: 1, dailyReviewPages: 4, morningMinutes: 60, eveningMinutes: 60, reviewIntervals: { excellent: 14, good: 7, weak: 3, repeat: 1 }, mushafEdition: 'مصحف المدينة 604 صفحة', allowExtraReviews: false, reminders: { morning: false, evening: false, overdue: false } };
+export function createInitialState(settings = defaultSettings) { const pages = {}; for (let p = 1; p <= settings.lastMemorizedPage; p++) {
+    pages[p] = { page: p, firstMemorized: settings.startDate, reviewCount: 0, nextReview: settings.startDate };
+} return { settings: { ...settings, reviewIntervals: { ...settings.reviewIntervals }, memorizationDays: [...settings.memorizationDays] }, pages, history: [], postponedDates: [], started: false, theme: 'light' }; }
